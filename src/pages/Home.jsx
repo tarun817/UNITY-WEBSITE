@@ -31,6 +31,12 @@ const Home = () => {
     'To inculcate the scense of leadership and management.',
     'To make students avail the opportunities to achieve academic excellence.'
   ]
+  const values = [
+    'To promote integrity, respect, and responsibility among students.',
+    'To encourage creativity, critical thinking, and innovation.',
+    'To build confidence and a positive attitude towards lifelong learning.',
+    'To foster teamwork, empathy, and social awareness.'
+  ]
 
   const offSchoolSafety = [
     { icon: '/img/cctv-camera.png', alt: 'CCTV Camera', text: 'CCTV coverage in school transport' },
@@ -333,7 +339,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="aboutWrapper">
+      <section className="aboutWrapper position-relative">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -356,28 +362,74 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h2 className="text-center fw-bold sectionHeading position-relative">
-                <span className="d-inline-block position-relative">Aims & Objectives</span>
+              <h2 className="text-center fw-bold sectionHeading position-relative mb-5">
+                <span className="d-inline-block position-relative">What We Stand For</span>
               </h2>
-              <div className="innerContent">
-                <h3 className="mb-3">Aims</h3>
-                <ol className="ps-4 mb-5">
-                  {aims.map((aim, index) => (
-                    <li key={index} className={index < aims.length - 1 ? 'mb-2' : ''}>
-                      {aim}
-                    </li>
-                  ))}
-                </ol>
-                <h3 className="mb-3 mt-5">Objectives</h3>
-                <ol className="ps-4">
-                  {objectives.map((objective, index) => (
-                    <li key={index} className={index < objectives.length - 1 ? 'mb-2' : ''}>
-                      {objective}
-                    </li>
-                  ))}
-                </ol>
+              <div className="row g-4">
+                {/* Aims Card */}
+                <div className="col-md-4">
+                  <div className="card h-100 border-0 shadow-sm">
+                    <div className="card-body">
+                      <div className="d-flex align-items-center mb-3">
+                        <div className="bg-primary text-white rounded-circle p-3 me-3">
+                          <i className="icon-group fs-4"></i>
+                        </div>
+                        <h3 className="card-title mb-0">Aims</h3>
+                      </div>
+                      <ol className="ps-3 mb-0">
+                        {aims.map((aim, index) => (
+                          <li key={index} className={index < aims.length - 1 ? 'mb-2' : ''}>
+                            {aim}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Objectives Card */}
+                <div className="col-md-4">
+                  <div className="card h-100 border-0 shadow-sm">
+                    <div className="card-body">
+                      <div className="d-flex align-items-center mb-3">
+                        <div className="bg-success text-white rounded-circle p-3 me-3">
+                          <i className="icon-ok fs-4"></i>
+                        </div>
+                        <h3 className="card-title mb-0">Objectives</h3>
+                      </div>
+                      <ol className="ps-3 mb-0">
+                        {objectives.map((objective, index) => (
+                          <li key={index} className={index < objectives.length - 1 ? 'mb-2' : ''}>
+                            {objective}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Values Card */}
+                <div className="col-md-4">
+                  <div className="card h-100 border-0 shadow-sm">
+                    <div className="card-body">
+                      <div className="d-flex align-items-center mb-3">
+                        <div className="bg-info text-white rounded-circle p-3 me-3">
+                          <i className="icon-heart fs-4"></i>
+                        </div>
+                        <h3 className="card-title mb-0">Values</h3>
+                      </div>
+                      <ol className="ps-3 mb-0">
+                        {values.map((value, index) => (
+                          <li key={index} className={index < values.length - 1 ? 'mb-2' : ''}>
+                            {value}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </div>
+                </div>
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </section>

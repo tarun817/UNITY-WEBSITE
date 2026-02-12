@@ -59,19 +59,14 @@
   text-decoration: none;
 }
 .bg-linear{
-  background: linear-gradient(
-    to bottom right,
-    #eff6ff,
-    #ffffff,
-    #f5f3ff
-  )
+  background: linear-gradient(to bottom right, #d7e4f5, #ffffff, #e5e1f6)
 }
 
 /* React specific adjustments */
 body {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Geist", sans-serif;
   font-weight: 500;
   font-size: 16px;
 }
@@ -80,7 +75,7 @@ body {
   min-height: 100vh;
 }
 h1, h2, h3, h4, h5, h6{
-  font-family: "Playwrite NZ Basic", cursive;
+  font-family: "Inter", sans-serif;
   color: #1a5395;
 }
 
@@ -507,8 +502,31 @@ body .fixed-header {
 .aboutWrapper{
   padding: 50px 0
 }
+.aboutWrapper::before{
+  position: absolute;
+  content: '';
+  bottom: 0;     
+  left: 0;     
+  width: 24rem;    
+  height: 18rem;    
+  background: linear-gradient(to bottom right, rgba(191, 219, 254, 0.3), rgba(103, 232, 249, 0.3));
+  border-radius: 9999px;
+  filter: blur(64px);   
+}
+.aboutWrapper::after{
+  position: absolute;
+  content: '';
+  top: 0;     
+  right: 0;     
+  width: 24rem;    
+  height: 18rem;    
+  background: linear-gradient(to bottom right, rgba(18, 95, 252, 0.2), rgba(4, 37, 164, 0.2));
+  border-radius: 9999px;
+  filter: blur(64px);   
+}
+
 .aboutWrapper .mainCard{
-  background: linear-gradient(to bottom right, #60a5fa, #2563eb, #4338ca);
+  background-color: #1a5395;
   padding: 48px 20px;
   border-radius: 36px;
 }
@@ -525,7 +543,7 @@ body .fixed-header {
   right: 0;
   bottom: -16px;
   margin: 0 auto;
-  background: linear-gradient(to bottom right, #22d3ee, #3b82f6, #1d4ed8);
+  background-color: #2163af;
   z-index: 2;
   border-radius: 0 0 32px 32px;
 }
@@ -538,7 +556,7 @@ body .fixed-header {
   right: 0;
   bottom: -30px;
   margin: 0 auto;
-  background: linear-gradient(to bottom right, #22d3ee, #3b82f6, #1d4ed8);
+  background-color: #3674ba;
   z-index: 1;
   border-radius: 0 0 32px 32px;
 }
@@ -555,7 +573,7 @@ body .fixed-header {
 }
 .sectionHeading{
   color: #1a5395;
-  font-size: 28px;
+  font-size: 30px;
 }
 .sectionHeading span::before, .sectionHeading span::after{
   position: absolute;
@@ -653,10 +671,10 @@ body .fixed-header {
     padding: 100px 0
   }
   .aboutWrapper .mainCard{
-    padding: 48px 88px;
+    padding: 48px;
   }
   .aboutWrapper .mainCard h2{
-    font-size: 28px;
+    font-size: 42px;
   }
   .aboutWrapper .mainCard::before{
     bottom: -32px;
@@ -668,7 +686,7 @@ body .fixed-header {
     padding: 100px 0;
   }
   .sectionHeading{
-    font-size: 35px;
+    font-size: 60px;
   }
   .safetyWrapper h3 {
     font-size: 32px;
