@@ -7,7 +7,7 @@
 @import '../css/theme-elements.css';
 @import '../css/custom.css';
 @import '../css/skins/blue.css';
-@import '../css/bootstrap-responsive.css';
+/* @import '../css/bootstrap-responsive.css'; */
 @import '../css/theme-responsive.css';
 @import '../myflexslider/css/flexslider.css';
 @import '../mygallery/css/nanogallery.css';
@@ -76,7 +76,7 @@ body {
 }
 h1, h2, h3, h4, h5, h6{
   font-family: "Inter", sans-serif;
-  color: #1a5395;
+  color: #000;
 }
 
 /* Slick Slider Styles */
@@ -183,20 +183,102 @@ h1, h2, h3, h4, h5, h6{
 .testimonial-section {
   background: #ffffff;
   position: relative;
-  padding: 100px 0;
+  padding: 50px 0;
 }
 .testimonial-slider-wrapper{
   background: linear-gradient(177deg,rgba(39, 84, 151, 1) 0%, rgba(2, 29, 80, 1) 50%, rgba(8, 43, 108, 1) 100%);
   border-radius: 20px;
   padding: 8px;
 }
+.testimonial-slider-wrapper .slick-track{
+  display: flex !important;
+}
+/* Image Slider Styles */
+.imageSlider {
+  width: 100%;
+  position: relative;
+}
+
+.imageSlider .slick-slide {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.imageSlider .slick-slide.slick-active {
+  opacity: 1;
+}
+
+.imageSlider .slick-dots {
+  bottom: -30px;
+  z-index: 1;
+}
+
+.imageSlider .slick-dots li button:before {
+  font-size: 12px;
+  color: #6b7280;
+  opacity: 0.5;
+}
+
+.imageSlider .slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: #2563eb;
+}
 
 .testimonial-image {
   overflow: hidden;
   border-radius: 12px;
-  height: auto;
+  max-height: 300px;
+}
+
+.testimonial-image img {
   width: 100%;
-  max-width: 400px;
+  height: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Image Slider Arrows - Positioned below, centered */
+.imageSlider {
+  position: relative;
+}
+
+.imageSlider .slick-prev,
+.imageSlider .slick-next {
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+  background: #4a148c !important; /* Dark purple background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  top: auto;
+  bottom: -70px;
+  transform: translateX(0);
+  margin-top: 0;
+}
+
+
+.imageSlider .slick-prev {
+  left: calc(50% - 60px); /* Center minus half the gap between arrows */
+  right: auto;
+}
+
+.imageSlider .slick-next {
+  right: auto;
+  left: calc(50% + 10px); /* Center plus small offset */
+}
+
+.imageSlider .slick-prev:before,
+.imageSlider .slick-next:before {
+  display: none;
+}
+
+.imageSlider .slick-prev svg,
+.imageSlider .slick-next svg {
+  color: #ffffff;
+  stroke-width: 2.5;
 }
 
 .testimonial-content p {
@@ -209,7 +291,7 @@ h1, h2, h3, h4, h5, h6{
   .testimonial-content {
     border-radius: 0 0 20px 20px;
     margin-top: 0;
-    padding: 30px 20px;
+    padding: 20px 0;
     min-height: auto;
   }
 
@@ -508,10 +590,11 @@ body .fixed-header {
   bottom: 0;     
   left: 0;     
   width: 24rem;    
-  height: 18rem;    
+  height: 24rem;    
   background: linear-gradient(to bottom right, rgba(191, 219, 254, 0.3), rgba(103, 232, 249, 0.3));
   border-radius: 9999px;
   filter: blur(64px);   
+  transform: translateY(44.3957px) rotate(100.088deg);
 }
 .aboutWrapper::after{
   position: absolute;
@@ -519,10 +602,11 @@ body .fixed-header {
   top: 0;     
   right: 0;     
   width: 24rem;    
-  height: 18rem;    
+  height: 24rem;    
   background: linear-gradient(to bottom right, rgba(18, 95, 252, 0.2), rgba(4, 37, 164, 0.2));
   border-radius: 9999px;
   filter: blur(64px);   
+  transform: translateY(38.7602px) rotate(110.232deg);
 }
 
 .aboutWrapper .mainCard{
@@ -569,11 +653,21 @@ body .fixed-header {
   font-size: 24px;
 }
 .aimsWrapper{
-  padding: 50px 0;
+  padding: 30px 0;
+  background-color: #f8fafc;
+}
+.aimsWrapper::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: radial-gradient(ellipse at center, rgba(18, 95, 252, 0.3), #f8fafc, #f8fafc);
+  backdrop-filter: blur(64px);
 }
 .sectionHeading{
-  color: #1a5395;
-  font-size: 30px;
+  font-size: 24px;
 }
 .sectionHeading span::before, .sectionHeading span::after{
   position: absolute;
@@ -599,12 +693,16 @@ body .fixed-header {
   font-size: 30px;
   background-image: linear-gradient(to right, #eee, #fff);
 }
+.safetyWrapper{
+  padding: 50px 0;
+  background-color: #f8fafc
+}
 .safetyWrapper h3 {
-  font-size: 28px;
+  font-size: 24px;
   line-height: normal;
   letter-spacing: 0.2px;
 }
-.safetyWrapper ul li span{
+.iconRoundWrap{
   width: 48px;
   border-radius: 50%;
   background-color: #dbeafe;
@@ -613,14 +711,70 @@ body .fixed-header {
   justify-content: center;
   aspect-ratio: 1 / 1;
 }
-.safetyWrapper ul li span img{
+.iconRoundWrap img{
   width: 24px;
 }
 .safetyWrapper .imgWrap{
   aspect-ratio: 4 / 3;
   border-radius: 16px;
 }
+.squareIconWrap{
+  width: 48px;
+  height: 48px;
+  background-color: #dbeafe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transform: scale(0.87);
+  transition: all 0.5s ease;
+}
+.squareIconWrap img{
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+}
+.aimsWrapper .card:hover span.squareIconWrap {
+  transform: scale(1.1);
+}
+.card-title{
+  font-size: 28px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.2px;
+}
+.card-body li{
+  color: #777;
+}
+.aimsWrapper .card{
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-width: 2px;
+  border-color: rgba(226, 232, 240, 0.5);
+  transition: all 0.5s ease;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  transform: none;
+}
+.aimsWrapper .card:hover{
+  transform: translateY(-12px) scale(1.02);
+}
 
+/* footer section */
+.footerHeading{
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 22px;
+}
+.footerLink, .contactLink a{
+  color: #ccc !important;
+  transition: all 0.5s ease;
+
+}
+.footerLink:hover,.contactLink a:hover{
+  color: #fff !important;
+  text-decoration: underline !important;
+}
     
 
 /* Responsive Design */
@@ -668,7 +822,7 @@ body .fixed-header {
     display: block;
   }
   .aboutWrapper{
-    padding: 100px 0
+    padding: 100px 0 150px
   }
   .aboutWrapper .mainCard{
     padding: 48px;
@@ -688,8 +842,14 @@ body .fixed-header {
   .sectionHeading{
     font-size: 60px;
   }
+  .safetyWrapper{
+    padding: 80px 0 100px;
+  }
   .safetyWrapper h3 {
     font-size: 32px;
+  }
+  .testimonial-section{
+    padding: 100px 0
   }
 }
 
@@ -717,5 +877,11 @@ body .fixed-header {
   }
   .hero-slider .slick-slide img{
     border-radius: 20px;
+  }
+  .testimonial-image{
+    max-height: 200px;
+  }
+  .testimonial-content p{
+    font-size: 16px;
   }
 }

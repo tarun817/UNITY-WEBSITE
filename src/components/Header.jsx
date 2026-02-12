@@ -164,7 +164,7 @@ const Header = () => {
   }, [])
 
   return (
-    <header className="fixed-header bg-linear">
+    <header className="fixed-header bg-linear px-0">
       <div className="container">
         <div className="headerContent bg-white d-flex justify-content-between align-items-center position-relative" >
           {/* Logo */}

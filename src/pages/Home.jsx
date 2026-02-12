@@ -5,8 +5,9 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const Home = () => {
   const sliderRef = useRef(null)
-  const testimonialSliderRef = useRef(null)
+  const imageSliderRef = useRef(null)
   const arrowRootsRef = useRef({ prev: null, next: null })
+  const imageArrowRootsRef = useRef({ prev: null, next: null })
 
   // Data arrays for optimization
   const sliderImages = [
@@ -50,30 +51,30 @@ const Home = () => {
     { icon: '/img/doctor.png', alt: 'Bus Service', text: 'Trained school resident doctor' }
   ]
 
-  const testimonials = [
-    {
-      image: 'mygallery/yuva26/101.jpg',
-      alt: 'Testimonial',
-      content: (
-        <p className="text-white mb-3">
-          13th Jan 2026 :: Pritam, a class 12th student of Unity Public Senior Secondary School, Rewalsar, won the title of second runner-up in story writing in the State level Yuva Utsav district Bilaspur, organized by the Department of Youth Services and Sports, Himachal Pradesh.
-        </p>
-      )
-    },
-    {
-      image: '/img/testimonial2.jpg',
-      alt: 'Testimonial',
-      content: (
-        <>
-          <h3 className="text-white fw-bold mb-2">Tankeshwar Kumar</h3>
-          <p className="text-white mb-3">Prof. Tankeshwar Kumar, Vice Chancellor, Central University of Haryana, Mahendergarh</p>
-          <p className="text-white fst-italic">
-            "... I congratulate the Director, manav mangal School for bringing such a world class facility in Chandigarh, Mohali & Panchkula. Best wishes & regards."
-          </p>
-        </>
-      )
-    }
-  ]
+  // const testimonials = [
+  //   {
+  //     image: 'mygallery/yuva26/101.jpg',
+  //     alt: 'Testimonial',
+  //     content: (
+  //       <p className="text-white mb-3">
+  //         13th Jan 2026 :: Pritam, a class 12th student of Unity Public Senior Secondary School, Rewalsar, won the title of second runner-up in story writing in the State level Yuva Utsav district Bilaspur, organized by the Department of Youth Services and Sports, Himachal Pradesh.
+  //       </p>
+  //     )
+  //   },
+  //   {
+  //     image: '/img/testimonial2.jpg',
+  //     alt: 'Testimonial',
+  //     content: (
+  //       <>
+  //         <h3 className="text-white fw-bold mb-2">Tankeshwar Kumar</h3>
+  //         <p className="text-white mb-3">Prof. Tankeshwar Kumar, Vice Chancellor, Central University of Haryana, Mahendergarh</p>
+  //         <p className="text-white fst-italic">
+  //           "... I congratulate the Director, manav mangal School for bringing such a world class facility in Chandigarh, Mohali & Panchkula. Best wishes & regards."
+  //         </p>
+  //       </>
+  //     )
+  //   }
+  // ]
 
   useEffect(() => {
     // Load Slick Slider CSS and JS
@@ -192,8 +193,8 @@ const Home = () => {
           speed: 500,
           fade: false,
           cssEase: 'linear',
-          autoplay: false,
-          autoplaySpeed: 3000,
+          autoplay: true,
+          autoplaySpeed: 2000,
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: true,
@@ -242,36 +243,93 @@ const Home = () => {
       })
     }
 
-    // Initialize testimonial slider
-    const initializeTestimonialSlider = () => {
-      if (window.jQuery && window.jQuery.fn.slick && testimonialSliderRef.current) {
-        const isInitialized = window.jQuery(testimonialSliderRef.current).hasClass('slick-initialized')
+    // Initialize image slider arrows
+    const initializeImageSliderArrows = () => {
+      if (!imageSliderRef.current) return
+
+      const prevArrow = imageSliderRef.current.querySelector('.slick-prev')
+      const nextArrow = imageSliderRef.current.querySelector('.slick-next')
+
+      // Clean up existing arrow roots
+      if (imageArrowRootsRef.current.prev) {
+        try {
+          imageArrowRootsRef.current.prev.unmount()
+        } catch (e) {
+          // Ignore unmount errors
+        }
+        imageArrowRootsRef.current.prev = null
+      }
+
+      if (imageArrowRootsRef.current.next) {
+        try {
+          imageArrowRootsRef.current.next.unmount()
+        } catch (e) {
+          // Ignore unmount errors
+        }
+        imageArrowRootsRef.current.next = null
+      }
+
+      // Initialize prev arrow
+      if (prevArrow) {
+        prevArrow.innerHTML = ''
+        const prevContainer = document.createElement('div')
+        prevArrow.appendChild(prevContainer)
+        const prevRoot = createRoot(prevContainer)
+        prevRoot.render(<ChevronLeft size={24} />)
+        imageArrowRootsRef.current.prev = prevRoot
+      }
+
+      // Initialize next arrow
+      if (nextArrow) {
+        nextArrow.innerHTML = ''
+        const nextContainer = document.createElement('div')
+        nextArrow.appendChild(nextContainer)
+        const nextRoot = createRoot(nextContainer)
+        nextRoot.render(<ChevronRight size={24} />)
+        imageArrowRootsRef.current.next = nextRoot
+      }
+    }
+
+    // Initialize image slider with autoplay and fade
+    const initializeImageSlider = () => {
+      if (window.jQuery && window.jQuery.fn.slick && imageSliderRef.current) {
+        const isInitialized = window.jQuery(imageSliderRef.current).hasClass('slick-initialized')
         
         if (isInitialized) {
+          initializeImageSliderArrows()
           return
         }
 
-        window.jQuery(testimonialSliderRef.current).slick({
+        window.jQuery(imageSliderRef.current).slick({
           dots: false,
           infinite: true,
-          speed: 500,
-          fade: false,
+          speed: 1000,
+          fade: true,
           cssEase: 'linear',
-          autoplay: false,
+          autoplay: true,
+          autoplaySpeed: 2000,
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
+          prevArrow: '<button type="button" class="slick-prev"></button>',
+          nextArrow: '<button type="button" class="slick-next"></button>',
+          pauseOnHover: true,
         })
+
+        // Wait a bit for Slick to fully initialize before adding arrows
+        setTimeout(() => {
+          initializeImageSliderArrows()
+        }, 100)
       }
     }
 
     // Load Slick Slider
     loadSlickSlider()
 
-    // Initialize testimonial slider after main slider is loaded
-    const initTestimonialTimeout = setTimeout(() => {
+    // Initialize image slider after main slider is loaded
+    const initImageSliderTimeout = setTimeout(() => {
       if (window.jQuery && window.jQuery.fn.slick) {
-        initializeTestimonialSlider()
+        initializeImageSlider()
       }
     }, 500)
 
@@ -292,33 +350,68 @@ const Home = () => {
 
     // Cleanup function
     return () => {
-      clearTimeout(initTestimonialTimeout)
+      clearTimeout(initImageSliderTimeout)
       window.removeEventListener('resize', handleResize)
 
-      // Clean up arrow roots
-      if (arrowRootsRef.current.prev) {
-        try {
-          arrowRootsRef.current.prev.unmount()
-        } catch (e) {
-          // Ignore unmount errors
+      // Clean up sliders first (check if initialized before unslick)
+      if (window.jQuery && window.jQuery.fn.slick) {
+        if (sliderRef.current) {
+          const $slider = window.jQuery(sliderRef.current)
+          if ($slider.hasClass('slick-initialized')) {
+            try {
+              $slider.slick('unslick')
+            } catch (e) {
+              // Ignore unslick errors
+            }
+          }
         }
-      }
-      if (arrowRootsRef.current.next) {
-        try {
-          arrowRootsRef.current.next.unmount()
-        } catch (e) {
-          // Ignore unmount errors
+        if (imageSliderRef.current) {
+          const $imageSlider = window.jQuery(imageSliderRef.current)
+          if ($imageSlider.hasClass('slick-initialized')) {
+            try {
+              $imageSlider.slick('unslick')
+            } catch (e) {
+              // Ignore unslick errors
+            }
+          }
         }
       }
 
-      if (window.jQuery && window.jQuery.fn.slick) {
-        if (sliderRef.current) {
-          window.jQuery(sliderRef.current).slick('unslick')
+      // Clean up arrow roots asynchronously to avoid race conditions
+      setTimeout(() => {
+        if (arrowRootsRef.current.prev) {
+          try {
+            arrowRootsRef.current.prev.unmount()
+          } catch (e) {
+            // Ignore unmount errors
+          }
+          arrowRootsRef.current.prev = null
         }
-        if (testimonialSliderRef.current) {
-          window.jQuery(testimonialSliderRef.current).slick('unslick')
+        if (arrowRootsRef.current.next) {
+          try {
+            arrowRootsRef.current.next.unmount()
+          } catch (e) {
+            // Ignore unmount errors
+          }
+          arrowRootsRef.current.next = null
         }
-      }
+        if (imageArrowRootsRef.current.prev) {
+          try {
+            imageArrowRootsRef.current.prev.unmount()
+          } catch (e) {
+            // Ignore unmount errors
+          }
+          imageArrowRootsRef.current.prev = null
+        }
+        if (imageArrowRootsRef.current.next) {
+          try {
+            imageArrowRootsRef.current.next.unmount()
+          } catch (e) {
+            // Ignore unmount errors
+          }
+          imageArrowRootsRef.current.next = null
+        }
+      }, 0)
     }
   }, [])
 
@@ -339,9 +432,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="aboutWrapper position-relative">
+      <section className="aboutWrapper position-relative overflow-hidden">
         <div className="container">
-          <div className="row">
+          <div className="row px-3 px-md-0">
             <div className="col-12">
               <div className="mainCard position-relative row align-items-center">
                 <div className="col-md-5">
@@ -358,7 +451,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="aimsWrapper">
+      <section className="aimsWrapper position-relative overflow-hidden">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -368,17 +461,17 @@ const Home = () => {
               <div className="row g-4">
                 {/* Aims Card */}
                 <div className="col-md-4">
-                  <div className="card h-100 border-0 shadow-sm">
-                    <div className="card-body">
-                      <div className="d-flex align-items-center mb-3">
-                        <div className="bg-primary text-white rounded-circle p-3 me-3">
-                          <i className="icon-group fs-4"></i>
-                        </div>
+                  <div className="card h-100 border-0">
+                    <div className="card-body p-4">
+                      <div className="d-flex align-items-center mb-3 gap-2 gap-md-3">
+                        <span className='squareIconWrap'>
+                          <img src='/img/goal.png' alt="aims icon" className="d-block" />
+                        </span>
                         <h3 className="card-title mb-0">Aims</h3>
                       </div>
                       <ol className="ps-3 mb-0">
                         {aims.map((aim, index) => (
-                          <li key={index} className={index < aims.length - 1 ? 'mb-2' : ''}>
+                          <li key={index} className={index < aims.length - 1 ? 'mb-2 fw-normal' : 'fw-normal'}>
                             {aim}
                           </li>
                         ))}
@@ -389,17 +482,17 @@ const Home = () => {
 
                 {/* Objectives Card */}
                 <div className="col-md-4">
-                  <div className="card h-100 border-0 shadow-sm">
-                    <div className="card-body">
-                      <div className="d-flex align-items-center mb-3">
-                        <div className="bg-success text-white rounded-circle p-3 me-3">
-                          <i className="icon-ok fs-4"></i>
-                        </div>
+                  <div className="card h-100 border-0">
+                    <div className="card-body p-4">
+                      <div className="d-flex align-items-center mb-3 gap-2 gap-md-3">
+                        <span className='squareIconWrap'>
+                          <img src='/img/target.png' alt="target icon" className="d-block" />
+                        </span>
                         <h3 className="card-title mb-0">Objectives</h3>
                       </div>
                       <ol className="ps-3 mb-0">
                         {objectives.map((objective, index) => (
-                          <li key={index} className={index < objectives.length - 1 ? 'mb-2' : ''}>
+                          <li key={index} className={index < objectives.length - 1 ? 'mb-2 fw-normal' : 'fw-normal'}>
                             {objective}
                           </li>
                         ))}
@@ -410,17 +503,17 @@ const Home = () => {
 
                 {/* Values Card */}
                 <div className="col-md-4">
-                  <div className="card h-100 border-0 shadow-sm">
-                    <div className="card-body">
-                      <div className="d-flex align-items-center mb-3">
-                        <div className="bg-info text-white rounded-circle p-3 me-3">
-                          <i className="icon-heart fs-4"></i>
-                        </div>
+                  <div className="card h-100 border-0">
+                    <div className="card-body p-4">
+                      <div className="d-flex align-items-center mb-3 gap-2 gap-md-3">
+                        <span className='squareIconWrap'>
+                          <img src='/img/values.png' alt="values icon" className="d-block" />
+                        </span>
                         <h3 className="card-title mb-0">Values</h3>
                       </div>
                       <ol className="ps-3 mb-0">
                         {values.map((value, index) => (
-                          <li key={index} className={index < values.length - 1 ? 'mb-2' : ''}>
+                          <li key={index} className={index < values.length - 1 ? 'mb-2 fw-normal' : 'fw-normal'}>
                             {value}
                           </li>
                         ))}
@@ -435,7 +528,7 @@ const Home = () => {
       </section>
       <section className="safetyWrapper">
         <div className="container">
-          <div className="row mb-5">
+          <div className="row mb-3 mb-md-5">
             <div className="col-12">
               <h2 className="text-center fw-bold sectionHeading position-relative">
                 <span className="d-inline-block position-relative">Student Safety</span>
@@ -447,11 +540,11 @@ const Home = () => {
           </div>
           <div className="row align-items-center">
             <div className="col-md-6">
-              <h3 className="fw-bold mb-4">Off School Safety</h3>
+              <h3 className="fw-bold mb-3 mb-md-4 text-center text-md-start">Off School Safety</h3>
               <ul className="list-unstyled">
                 {offSchoolSafety.map((item, index) => (
                   <li key={index} className="d-flex align-items-center gap-3 mb-3">
-                    <span>
+                    <span className='iconRoundWrap'>
                       <img src={item.icon} alt={item.alt} className="d-block" />
                     </span>
                     <p className="mb-0">{item.text}</p>
@@ -470,11 +563,11 @@ const Home = () => {
               </div>
             </div>
             <div className="col-md-6 order-1 order-md-2">
-              <h3 className="fw-bold mb-4">In School Safety</h3>
+              <h3 className="fw-bold mb-3 mb-md-4 text-center text-md-start">In School Safety</h3>
               <ul className="list-unstyled">
                 {inSchoolSafety.map((item, index) => (
                   <li key={index} className="d-flex align-items-center gap-3 mb-3">
-                    <span>
+                    <span className='iconRoundWrap'>
                       <img src={item.icon} alt={item.alt} className="d-block" />
                     </span>
                     <p className="mb-0">{item.text}</p>
@@ -488,26 +581,42 @@ const Home = () => {
       </section>
       <section className="testimonial-section">
         <div className="container position-relative">
-          <h2 className="text-center fw-bold sectionHeading position-relative mb-5">
+          <h2 className="text-center fw-bold sectionHeading position-relative mb-3 mb-md-5">
             <span className="d-inline-block position-relative">Proud Moment</span>
           </h2>
-          <div className="testimonial-slider-wrapper" ref={testimonialSliderRef}>
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-slide">
+          <div className="testimonial-slider-wrapper">
+            {/* {testimonials.map((testimonial, index) => ( */}
+              <div className="testimonial-slide">
                 <div className="row align-items-center g-0">
                   <div className="col-md-5">
-                    <div className="testimonial-image">
-                      <img src={testimonial.image} alt={testimonial.alt} className="w-100" />
+                    <div className="imageSlider" ref={imageSliderRef}>
+                      {/* <div> */}
+                        <div className="testimonial-image">
+                          <img src="mygallery/yuva26/101.jpg" alt="Gallery Image 1" className="w-100" />
+                        </div>
+                      {/* </div>
+                      <div> */}
+                        <div className="testimonial-image">
+                          <img src="mygallery/yuva26/102.jpg" alt="Gallery Image 2" className="w-100" />
+                        </div>
+                      {/* </div>
+                      <div> */}
+                        <div className="testimonial-image">
+                          <img src="mygallery/yuva26/103.jpg" alt="Gallery Image 3" className="w-100" />
+                        </div>
+                      {/* </div> */}
                     </div>
                   </div>
                   <div className="col-md-7">
-                    <div className="testimonial-content">
-                      {testimonial.content}
+                    <div className="testimonial-content ps-md-4">
+                    <p className="text-white mb-0">
+                      13th Jan 2026 :: Pritam, a class 12th student of Unity Public Senior Secondary School, Rewalsar, won the title of second runner-up in story writing in the State level Yuva Utsav district Bilaspur, organized by the Department of Youth Services and Sports, Himachal Pradesh.
+                    </p>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
+            {/* ))} */}
           </div>
         </div>
       </section>

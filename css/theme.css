@@ -653,7 +653,7 @@ footer {
 footer div.footer-ribon {
 	background: #999;
 	position: absolute;
-	margin: -100px 0 0 30px;
+	margin: -75px 0 0 30px;
 	padding: 10px 20px 6px 20px;
 }
 
@@ -663,7 +663,7 @@ footer div.footer-ribon::before {
 	content: "";
 	display: block;
 	height: 0;
-	left: -17px;
+	left: -9px;
 	position: absolute;
 	top: 0;
 	width: 7px;
@@ -724,19 +724,6 @@ footer a.logo {
 footer form {
 	filter: alpha(opacity=85);
 	opacity: 0.85;
-}
-
-footer h1,
-footer h2,
-footer h3,
-footer h4,
-footer h5,
-footer a {
-	color: #FFF !important;
-}
-
-footer a:hover {
-	color: #CCC;
 }
 
 footer h4 {
