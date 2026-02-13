@@ -729,9 +729,9 @@ div.feature-box div.feature-box-info {
 div.flexslider-simple {
 	-moz-border-radius: 8px;
 	-moz-box-shadow: 0 0px 3px 0px rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 8px;
+	-webkit-border-radius: 20px;
 	-webkit-box-shadow: 0 0px 3px 0px rgba(0, 0, 0, 0.2);
-	border-radius: 8px;
+	border-radius: 20px;
 	box-shadow: 0 0px 3px 0px rgba(0, 0, 0, 0.2);
 	overflow: hidden;
 }

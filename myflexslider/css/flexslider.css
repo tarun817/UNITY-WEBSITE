@@ -41,6 +41,8 @@
 .flexslider .slides img {
   width: 100%;
   display: block;
+  border-radius: 20px;
+  overflow: hidden;
 }
 .flexslider .slides:after {
   content: "\0020";
