@@ -1,3 +1,4 @@
+import { Facebook } from 'lucide-react'
 import React from 'react'
 
 const Footer = () => {
@@ -58,26 +59,33 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-dark text-light mt-0 position-relative">
+    <footer className="footerWrapper text-light mt-0 position-relative">
       <div className="container pb-md-5">
         <div className="footer-ribon">
           <span>Truth alone Triumphs !</span>
         </div>
         <div className="row g-4">
-          <div className="col-md-4">
-            <h5 className="mb-4 footerHeading text-light">Location</h5>
-            <div className="ratio ratio-16x9">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13588.182200041794!2d76.8379054!3d31.6326032!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x23a55fee90f8552c!2sUNITY+PUBLIC+SENIOR+SECONDARY+SCHOOL!5e0!3m2!1sen!2sin!4v1521867638416"
-                style={{ border: 0 }}
-                allowFullScreen
-                title="School Location"
-                className="rounded"
-              ></iframe>
+          <div className="col-12 mb-0 mb-md-4">
+            <p className='schoolName fs-6 text-uppercase fw-semibold mb-2'>Unity Public Senior Secondary School</p>
+            <h2 className='fs-4 mb-3 text-light fw-bold stayConntected'>Stay connected with campus life</h2>
+          </div>
+          <div className="col-md-6 col-lg-3">
+            <h5 className="mb-4 footerHeading text-light mt-0">About</h5>
+            <p className='subContent'>A joyful, student-first campus in Rewalsar—learning, sports, and culture in one community.</p>
+            <div className='mt-3'>
+              <p className='followUs text-uppercase mb-2 text-light'>follow us</p>
+              <a 
+                href="https://www.facebook.com/profile.php?id=100057642333055" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className='d-flex align-items-center gap-2 mediaWrap text-decoration-none'
+              >
+                <span><Facebook className='fbIcon text-light' /></span>
+                <span className='fw-medium fbText text-light'>Facebook</span>
+              </a>
             </div>
           </div>
-
-          <div className="col-md-4 ps-md-5 my-0">
+          <div className="col-md-6 col-lg-3 ps-md-5 mb-0">
             <h5 className="mb-4 footerHeading text-light">Important Links</h5>
             <ul className="list-unstyled">
               {importantLinks.map((link, index) => (
@@ -95,13 +103,12 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-
-          <div className="col-md-4 mb-0">
+          <div className="col-md-6 col-lg-3 mb-0">
             <h5 className="mb-4 footerHeading text-light">Contact Us</h5>
             <ul className="list-unstyled">
               {contactInfo.map((contact, index) => (
-                <li key={index} className="mb-3">
-                  <p className='text-decoration-none contactLink'>
+                <li key={index} className="mb-2">
+                  <p className='text-decoration-none contactLink mb-0'>
                     <span className='text-light'>
                     <i className={`${contact.icon} me-2`}></i>
                     <strong>{contact.label}: </strong>
@@ -114,6 +121,19 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
+          <div className="col-md-6 col-lg-3 ps-md-5">
+            <h5 className="mb-4 footerHeading text-light">Visit</h5>
+            <div className="ratio ratio-16x9">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13588.182200041794!2d76.8379054!3d31.6326032!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x23a55fee90f8552c!2sUNITY+PUBLIC+SENIOR+SECONDARY+SCHOOL!5e0!3m2!1sen!2sin!4v1521867638416"
+                style={{ border: 0 }}
+                allowFullScreen
+                title="School Location"
+                className="rounded"
+              ></iframe>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -121,7 +141,7 @@ const Footer = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-8 mx-auto">
-              <p className="mb-0 text-light">
+              <p className="mb-0 text-light text-center">
                 © Copyright 2016-24 Unity Public Senior Secondary School Rewalsar. All Rights Reserved.
               </p>
             </div>
