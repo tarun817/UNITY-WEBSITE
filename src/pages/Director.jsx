@@ -169,7 +169,7 @@ const Director = () => {
             </div>
 
             {/* Right Sidebar */}
-            <div className="col-lg-3 d-none d-lg-flex">
+            <div className="col-lg-3 rightSidebar">
               <div className="director-sidebar">
                 {/* Navigation */}
                 <div className="sidebar-section mb-5">

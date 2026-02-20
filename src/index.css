@@ -1020,6 +1020,9 @@ body .fixed-header {
   .ourDirector{
     padding: 80px 0;
   }
+  .rightSidebar{
+    display: none;
+  }
 }
 
 /* Desktop hover behavior */
