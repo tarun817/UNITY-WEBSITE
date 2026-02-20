@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import ErrorBoundary from './components/ErrorBoundary'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -153,7 +154,8 @@ function App() {
   }, [])
 
   return (
-    <Router>
+    <ErrorBoundary>
+      <Router>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -173,7 +175,8 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
         </Routes>
         <Footer />
-    </Router>
+      </Router>
+    </ErrorBoundary>
   )
 }
 

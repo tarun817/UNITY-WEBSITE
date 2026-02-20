@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { ChevronDown } from 'lucide-react'
 
 const Header = () => {
   const location = useLocation()
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [openMobileDropdown, setOpenMobileDropdown] = useState(null)
 
   const isActive = (path) => {
     return location.pathname === path
@@ -17,6 +19,36 @@ const Header = () => {
     setIsDarkMode(!isDarkMode)
     document.documentElement.classList.toggle('dark-mode')
   }
+
+  const toggleMobileDropdown = (key) => {
+    setOpenMobileDropdown(prev => prev === key ? null : key)
+  }
+
+  // Close all desktop dropdowns - call on link click and route change
+  const closeAllDesktopDropdowns = () => {
+    document.querySelectorAll('.nav-dropdown .dropdown-menu').forEach(menu => {
+      menu.classList.remove('show')
+    })
+    document.querySelectorAll('.nav-dropdown .dropdown-toggle').forEach(toggle => {
+      toggle.setAttribute('aria-expanded', 'false')
+    })
+    document.querySelectorAll('.dropend .dropdown-menu').forEach(menu => {
+      menu.classList.remove('show')
+    })
+    document.querySelectorAll('.dropend .dropdown-toggle').forEach(toggle => {
+      toggle.setAttribute('aria-expanded', 'false')
+    })
+  }
+
+  // Close mobile dropdown when route changes
+  useEffect(() => {
+    setOpenMobileDropdown(null)
+  }, [location.pathname])
+
+  // Close all desktop dropdowns when route changes
+  useEffect(() => {
+    closeAllDesktopDropdowns()
+  }, [location.pathname])
 
   useEffect(() => {
     // Remove sticky-menu-active class if it gets added by theme.js
@@ -169,7 +201,7 @@ const Header = () => {
         <div className="headerContent bg-white d-flex justify-content-between align-items-center position-relative" >
           {/* Logo */}
           <Link className="header-logo" to="/">
-            <img src="/img/logo.png" alt="Unity Public School Logo" height="32" />
+            <img src="/img/websiteLogo.png" alt="Unity Public School Logo" />
           </Link>
 
           {/* Navigation Links - Centered */}
@@ -195,13 +227,13 @@ const Header = () => {
                   About Us
                 </a>
                 <ul className="dropdown-menu shadow-sm border-0">
-                  <li><Link className="dropdown-item" to="/about-us">Overview</Link></li>
-                  <li><Link className="dropdown-item" to="/director">Director</Link></li>
-                  <li><Link className="dropdown-item" to="/admission">Admission</Link></li>
-                  <li><Link className="dropdown-item" to="/staff">Staff</Link></li>
-                  <li><Link className="dropdown-item" to="/schoolfees">School Fees</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/about-us') ? 'active' : ''}`} to="/about-us" onClick={closeAllDesktopDropdowns}>Overview</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/director') ? 'active' : ''}`} to="/director" onClick={closeAllDesktopDropdowns}>Director</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/admission') ? 'active' : ''}`} to="/admission" onClick={closeAllDesktopDropdowns}>Admission</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/staff') ? 'active' : ''}`} to="/staff" onClick={closeAllDesktopDropdowns}>Staff</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/schoolfees') ? 'active' : ''}`} to="/schoolfees" onClick={closeAllDesktopDropdowns}>School Fees</Link></li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="/contact-us">Contact Us</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/contact-us') ? 'active' : ''}`} to="/contact-us" onClick={closeAllDesktopDropdowns}>Contact Us</Link></li>
                 </ul>
               </li>
 
@@ -221,13 +253,13 @@ const Header = () => {
                       Academics
                     </a>
                     <ul className="dropdown-menu shadow-sm border-0">
-                      <li><Link className="dropdown-item" to="/curriculum">Curriculum</Link></li>
-                      <li><Link className="dropdown-item" to="/streams">Streams Offered</Link></li>
+                      <li><Link className={`dropdown-item ${isActive('/curriculum') ? 'active' : ''}`} to="/curriculum" onClick={closeAllDesktopDropdowns}>Curriculum</Link></li>
+                      <li><Link className={`dropdown-item ${isActive('/streams') ? 'active' : ''}`} to="/streams" onClick={closeAllDesktopDropdowns}>Streams Offered</Link></li>
                     </ul>
                   </li>
                   <li><hr className="dropdown-divider" /></li>
-                  <li><Link className="dropdown-item" to="/facilities">Facilities</Link></li>
-                  <li><Link className="dropdown-item" to="/housesystem">House System</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/facilities') ? 'active' : ''}`} to="/facilities" onClick={closeAllDesktopDropdowns}>Facilities</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/housesystem') ? 'active' : ''}`} to="/housesystem" onClick={closeAllDesktopDropdowns}>House System</Link></li>
                 </ul>
               </li>
 
@@ -242,8 +274,8 @@ const Header = () => {
                   Activities
                 </a>
                 <ul className="dropdown-menu shadow-sm border-0">
-                  <li><Link className="dropdown-item" to="/cocurricularactivities">Co-curricular Activities</Link></li>
-                  <li><Link className="dropdown-item" to="/pacesettingactivities">Pace Setting Activities</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/cocurricularactivities') ? 'active' : ''}`} to="/cocurricularactivities" onClick={closeAllDesktopDropdowns}>Co-curricular Activities</Link></li>
+                  <li><Link className={`dropdown-item ${isActive('/pacesettingactivities') ? 'active' : ''}`} to="/pacesettingactivities" onClick={closeAllDesktopDropdowns}>Pace Setting Activities</Link></li>
                 </ul>
               </li>
 
@@ -287,9 +319,64 @@ const Header = () => {
         <div className="collapse mobile-nav" id="mobileNav">
           <ul className="mobile-nav-links">
             <li><Link to="/" className={isActive('/') ? 'active' : ''}>Home</Link></li>
-            <li><Link to="/about-us" className={isActiveDropdown(['/about', '/director', '/admission', '/staff', '/schoolfees', '/contact-us']) ? 'active' : ''}>About Us</Link></li>
-            <li><Link to="/curriculum" className={isActiveDropdown(['/curriculum', '/streams', '/facilities', '/housesystem']) ? 'active' : ''}>Inside School</Link></li>
-            <li><Link to="/cocurricularactivities" className={isActiveDropdown(['/cocurricularactivities', '/pacesettingactivities']) ? 'active' : ''}>Activities</Link></li>
+
+            {/* About Us - Dropdown */}
+            <li className="mobile-dropdown-item">
+              <button
+                type="button"
+                className={`mobile-dropdown-toggle ${isActiveDropdown(['/about', '/director', '/admission', '/staff', '/schoolfees', '/contact-us']) ? 'active' : ''} ${openMobileDropdown === 'about' ? 'open' : ''}`}
+                onClick={() => toggleMobileDropdown('about')}
+                aria-expanded={openMobileDropdown === 'about'}
+              >
+                <span>About Us</span>
+                <ChevronDown className="mobile-dropdown-arrow" size={18} />
+              </button>
+              <ul className={`mobile-dropdown-menu ${openMobileDropdown === 'about' ? 'show' : ''}`}>
+                <li><Link to="/about-us" className={`mobile-dropdown-link ${isActive('/about-us') ? 'active' : ''}`}>Overview</Link></li>
+                <li><Link to="/director" className={`mobile-dropdown-link ${isActive('/director') ? 'active' : ''}`}>Director</Link></li>
+                <li><Link to="/admission" className={`mobile-dropdown-link ${isActive('/admission') ? 'active' : ''}`}>Admission</Link></li>
+                <li><Link to="/staff" className={`mobile-dropdown-link ${isActive('/staff') ? 'active' : ''}`}>Staff</Link></li>
+                <li><Link to="/schoolfees" className={`mobile-dropdown-link ${isActive('/schoolfees') ? 'active' : ''}`}>School Fees</Link></li>
+                <li><Link to="/contact-us" className={`mobile-dropdown-link ${isActive('/contact-us') ? 'active' : ''}`}>Contact Us</Link></li>
+              </ul>
+            </li>
+
+            {/* Inside School - Dropdown */}
+            <li className="mobile-dropdown-item">
+              <button
+                type="button"
+                className={`mobile-dropdown-toggle ${isActiveDropdown(['/curriculum', '/streams', '/facilities', '/housesystem']) ? 'active' : ''} ${openMobileDropdown === 'inside' ? 'open' : ''}`}
+                onClick={() => toggleMobileDropdown('inside')}
+                aria-expanded={openMobileDropdown === 'inside'}
+              >
+                <span>Inside School</span>
+                <ChevronDown className="mobile-dropdown-arrow" size={18} />
+              </button>
+              <ul className={`mobile-dropdown-menu ${openMobileDropdown === 'inside' ? 'show' : ''}`}>
+                <li><Link to="/curriculum" className={`mobile-dropdown-link ${isActive('/curriculum') ? 'active' : ''}`}>Curriculum</Link></li>
+                <li><Link to="/streams" className={`mobile-dropdown-link ${isActive('/streams') ? 'active' : ''}`}>Streams Offered</Link></li>
+                <li><Link to="/facilities" className={`mobile-dropdown-link ${isActive('/facilities') ? 'active' : ''}`}>Facilities</Link></li>
+                <li><Link to="/housesystem" className={`mobile-dropdown-link ${isActive('/housesystem') ? 'active' : ''}`}>House System</Link></li>
+              </ul>
+            </li>
+
+            {/* Activities - Dropdown */}
+            <li className="mobile-dropdown-item">
+              <button
+                type="button"
+                className={`mobile-dropdown-toggle ${isActiveDropdown(['/cocurricularactivities', '/pacesettingactivities']) ? 'active' : ''} ${openMobileDropdown === 'activities' ? 'open' : ''}`}
+                onClick={() => toggleMobileDropdown('activities')}
+                aria-expanded={openMobileDropdown === 'activities'}
+              >
+                <span>Activities</span>
+                <ChevronDown className="mobile-dropdown-arrow" size={18} />
+              </button>
+              <ul className={`mobile-dropdown-menu ${openMobileDropdown === 'activities' ? 'show' : ''}`}>
+                <li><Link to="/cocurricularactivities" className={`mobile-dropdown-link ${isActive('/cocurricularactivities') ? 'active' : ''}`}>Co-curricular Activities</Link></li>
+                <li><Link to="/pacesettingactivities" className={`mobile-dropdown-link ${isActive('/pacesettingactivities') ? 'active' : ''}`}>Pace Setting Activities</Link></li>
+              </ul>
+            </li>
+
             <li><Link to="/results" className={isActive('/results') ? 'active' : ''}>Results</Link></li>
             <li><Link to="/gallery" className={isActive('/gallery') ? 'active' : ''}>Gallery</Link></li>
           </ul>
