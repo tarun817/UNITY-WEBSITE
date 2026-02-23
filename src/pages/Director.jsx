@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Check, ArrowRight, Phone, Mail } from 'lucide-react'
+import { Check } from 'lucide-react'
 import LabeledCard from '../components/LabeledCard'
+import SidebarNavigation from '../components/SidebarNavigation'
 
 const Director = () => {
   const thisYearFocus = [
@@ -21,15 +22,6 @@ const Director = () => {
     { title: "MOMENTUM", description: "Review weekly, improve daily" }
   ]
 
-  const navigationLinks = [
-    { path: "/about-us", label: "Overview" },
-    { path: "/director", label: "Director" },
-    { path: "/admission", label: "Admission" },
-    { path: "/staff", label: "Staff" },
-    { path: "/fees", label: "School Fees" },
-    { path: "/contact-us", label: "Contact Us" }
-  ]
-
   return (
     <main className="director-page">
       {/* Top Header Section */}
@@ -37,7 +29,7 @@ const Director = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-7 mx-auto text-center">
-              <h1 className="director-main-title fw-bold">Learn like builders - <span>think like leaders.</span></h1>
+              <h1 className="heroMainTitle fw-bold">Learn like builders - <span>think like leaders.</span></h1>
               <p className="director-subtitle mx-auto">
                 We are shaping students for a future that will not slow down: clear thinking, disciplined work, and the courage to improve in public.
               </p>
@@ -48,7 +40,7 @@ const Director = () => {
           </div>
         </div>
       </section>
-      <section className="director-content">
+      <section className="mainInnerContent">
         <div className="container">
           <div className="row">
             {/* Main Content */}
@@ -170,49 +162,7 @@ const Director = () => {
 
             {/* Right Sidebar */}
             <div className="col-lg-3 rightSidebar">
-              <div className="director-sidebar">
-                {/* Navigation */}
-                <div className="sidebar-section mb-5">
-                  <LabeledCard
-                    className="sidebar-navigation-card"
-                    withShadow
-                    label="NAVIGATION"
-                    labelClassName="sidebar-navigation-label commonLabel"
-                  >
-                    <h3 className="sidebar-school-name">UNITY PUBLIC SEN. SEC. SCHOOL</h3>
-                    <nav className="sidebar-nav">
-                      <ul className="list-unstyled mb-0">
-                        {navigationLinks.map((link, index) => (
-                          <li key={index} className="sidebar-nav-item">
-                            <Link to={link.path} className="sidebar-nav-link">
-                              <span>{link.label}</span>
-                              <ArrowRight size={16} />
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </nav>
-                  </LabeledCard>
-                </div>
-
-                {/* Need Help Section */}
-                <LabeledCard className="sidebar-navigation-card" withShadow>
-                  <h4 className="sidebar-help-title">NEED HELP?</h4>
-                  <p className="sidebar-help-description">
-                    Admissions, schedules, documents—send a message and we'll reply with the next step.
-                  </p>
-                  <div className="sidebar-help-buttons d-flex flex-column gap-2">
-                    <button className="btn btn-outline-dark">
-                      <Phone size={16} className="me-2" />
-                      Call Office
-                    </button>
-                    <button className="btn btn-outline-dark">
-                      <Mail size={16} className="me-2" />
-                      Send Email
-                    </button>
-                  </div>
-                </LabeledCard>
-              </div>
+              <SidebarNavigation />
             </div>
           </div>
         </div>

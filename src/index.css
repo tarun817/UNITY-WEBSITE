@@ -751,6 +751,7 @@ body .fixed-header {
 .aimsWrapper{
   padding: 30px 0;
   background-color: #f8fafc;
+  z-index: 9;
 }
 .aimsWrapper::before {
   position: absolute;
@@ -761,6 +762,7 @@ body .fixed-header {
   left: 0;
   background-image: radial-gradient(ellipse at center, rgba(18, 95, 252, 0.3), #f8fafc, #f8fafc);
   backdrop-filter: blur(64px);
+  z-index: -1;
 }
 .sectionHeading{
   font-size: 28px;
@@ -924,17 +926,8 @@ body .fixed-header {
   color: #000000;
   line-height: 1.2;
 }
-/* .sectionHeading span{
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text !important;
-  background: linear-gradient(177deg,rgba(39, 84, 151, 1) 0%, rgba(2, 29, 80, 1) 50%, rgba(8, 43, 108, 1) 100%);
-} */
 
 /* director section css */
-.ourDirector{
-  padding: 100px 0;
-  background-color: #f8fafc;
-}
 .ourDirector .highlightedText{
   text-align: left !important;
   clear: both;
@@ -1023,6 +1016,10 @@ body .fixed-header {
   .rightSidebar{
     display: none;
   }
+  .staff-table-wrapper{
+    overflow-x: auto;
+  }
+  
 }
 
 /* Desktop hover behavior */
@@ -1214,7 +1211,7 @@ body .fixed-header {
 .salient-feature-icon {
   width: 48px;
   height: 48px;
-  background: #7c3aed;
+  background: #1a5395;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1255,12 +1252,12 @@ body .fixed-header {
   height: 100%;
 }
 
-.director-main-title {
+.heroMainTitle {
   font-size: 60px;
   line-height: 1.2;
   margin-bottom: 20px;
 }
-.director-main-title span{
+.heroMainTitle span{
   color: #1a5395;
 }
 
@@ -1289,7 +1286,7 @@ body .fixed-header {
   padding: 12px 24px;
   font-weight: 600;
 }
-.director-content {
+.mainInnerContent{
   padding: 120px 0;
   background-color: #f8fafc;
 }
@@ -1351,7 +1348,7 @@ body .fixed-header {
 }
 
 /* Director Manifesto */
-.director-manifesto {
+.director-manifesto, .documentDetails {
   background: #fff;
   padding: 24px;
   border-radius: 16px;
@@ -1360,7 +1357,7 @@ body .fixed-header {
   z-index: 1;
   border: 1px solid #e5e7eb;
 }
-.director-manifesto::after {
+.director-manifesto::after, .documentDetails::after {
   position: absolute;
   content: '';
   top: 0;
@@ -1453,6 +1450,306 @@ body .fixed-header {
   font-size: 12px;
   margin-bottom: 0;
   line-height: 1.6;
+  font-weight: 500;
+}
+
+/* LabeledCard Icon */
+.labeled-card-icon {
+  margin-bottom: 12px;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  color: #1a5395;
+  width: 100%;
+}
+
+.labeled-card-icon svg {
+  display: block !important;
+  width: 24px !important;
+  height: 24px !important;
+  flex-shrink: 0;
+  stroke-width: 2;
+}
+
+/* Staff Directory Styles */
+.directory-header {
+  margin-bottom: 32px;
+}
+
+.directory-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.directory-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.directory-search .input-group {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.directory-search .input-group-text {
+  border: 1px solid #e5e7eb;
+  border-right: none;
+  padding: 12px 16px;
+}
+
+.directory-search .form-control {
+  border: 1px solid #e5e7eb;
+  border-left: none;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.directory-search .form-control:focus {
+  box-shadow: none;
+  border-color: #1a5395;
+}
+
+.directory-filters {
+  margin-top: 12px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #6b7280;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.filter-btn.active {
+  background: #1a5395;
+  color: #ffffff;
+  border-color: #1a5395;
+}
+
+.filter-count {
+  font-size: 14px;
+  color: #1a5395;
+  font-weight: 500;
+  background-color: #eff6ff;
+  border-radius: 50px;
+  width: fit-content;
+  padding: 4px 12px;
+
+}
+
+/* Staff Cards */
+.staff-cards-grid {
+  margin-top: 24px;
+}
+
+.staff-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  height: 100%;
+  border: 1px solid #e5e7eb;
+}
+.staff-card .shadowDiv::before {
+  height: 15px;
+  bottom: -15px;
+}
+.staff-card-category {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 12px;
+  background: #f3f4f6;
+  color: #6b7280;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.staff-card-category.category-senior {
+  background: #dbeafe;
+  color: #1a5395;
+}
+
+.staff-card-content {
+  padding-top: 8px;
+}
+
+.staff-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.staff-avatar svg {
+  width: 20px;
+  height: 20px;
+}
+.staff-info {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.staff-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
+  display: block;
+}
+
+.staff-role {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.staff-details {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.staff-detail-item {
+  margin-bottom: 8px;
+}
+
+.staff-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.staff-detail-text {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Staff Details Table */
+.memberList {
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.staff-details-header {
+  margin-bottom: 24px;
+}
+
+.staff-details-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.staff-details-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.staff-table-search {
+  margin-bottom: 0;
+}
+
+.staff-table-search .input-group {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.staff-table-search .input-group-text {
+  border: 1px solid #e5e7eb;
+  border-right: none;
+  padding: 10px 14px;
+}
+
+.staff-table-search .form-control {
+  border: 1px solid #e5e7eb;
+  border-left: none;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.staff-table-search .form-control:focus {
+  box-shadow: none;
+  border-color: #e5e7eb;
+}
+
+.staff-table-wrapper {
+  overflow-x: auto;
+}
+
+.staff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  background: #ffffff;
+}
+
+.staff-table thead {
+  background: #f9fafb;
+}
+
+.staff-table thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.staff-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.staff-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.staff-table tbody tr:hover {
+  background: #f3f4f6;
+}
+
+.staff-table tbody td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #1f2937;
+  vertical-align: middle;
+}
+
+.staff-table tbody td:first-child {
   font-weight: 500;
 }
 .rightCol .shadowDiv::before {
@@ -1580,6 +1877,12 @@ a.sidebar-nav-link:hover {
   transform: translateY(-1px);
 }
 
+a.sidebar-nav-link.active {
+  background-color: #eff6ff;
+  color: #1a5395;
+  font-weight: 600;
+}
+
 .sidebar-nav-link svg {
   color: #374151;
   opacity: 0.7;
@@ -1628,13 +1931,34 @@ a.sidebar-nav-link:hover {
   border-color: #10b981;
   color: #10b981;
 }
+.admissionPage .promise-card-modern{
+  height: 90%
+}
+.admissionPage .promise-card-modern.shadowDiv::before{
+  width: 90%;
+}
+
+/* staff page css */
+.heroImgWrap {
+  max-width: 590px;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  margin: 0 0 0 auto;
+}
+.heroImgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
-  .director-content {
+  .mainInnerContent{
     padding: 60px 0 100px;
   }
-  .director-main-title {
+  .heroMainTitle {
     font-size: 32px;
   }
   
@@ -1655,6 +1979,17 @@ a.sidebar-nav-link:hover {
   }
   .rightCol {
     margin-top: 50px;
+  }
+  .admissionPage .promise-card-modern{
+    height: unset;
+    margin-bottom: 40px;
+  }
+  .director-hero{
+    padding: 120px 0 50px;
+  }
+  .filter-btn{
+    max-width: 138px;
+    width: 100%;
   }
 }
 

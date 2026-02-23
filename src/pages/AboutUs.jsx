@@ -112,7 +112,7 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-      <section className='ourDirector'>
+      <section className='ourDirector aimsWrapper position-relative overflow-hidden'>
         <div className="container">
           <div className="row">
             <div className="col-lg-6 ">
