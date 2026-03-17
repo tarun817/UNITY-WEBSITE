@@ -90,14 +90,14 @@ const SidebarNavigation = ({
             Admissions, schedules, documents—send a message and we'll reply with the next step.
           </p>
           <div className="sidebar-help-buttons d-flex flex-column gap-2">
-            <button className="btn btn-outline-dark">
+            <a href="tel:01905-240264" className="btn btn-outline-dark">
               <Phone size={16} className="me-2" />
               Call Office
-            </button>
-            <button className="btn btn-outline-dark">
+            </a>
+            <a href="mailto:upsssrewalsar@gmail.com" className="btn btn-outline-dark">
               <Mail size={16} className="me-2" />
               Send Email
-            </button>
+            </a>
           </div>
         </LabeledCard>
       )}
